@@ -22,6 +22,12 @@ on:
         description: 'Slack Webhook URL'
         required: true
     outputs:
+      aws-region:
+        description: 'AWS Region'
+        value: ${{ inputs.aws-region }}
+      ecr-repository:
+        description: 'ECR Repository'
+        value: ${{ inputs.ecr-repository }}
       image-tag:
         description: 'Image tag'
         value: ${{ jobs.build.outputs.image-tag }}
