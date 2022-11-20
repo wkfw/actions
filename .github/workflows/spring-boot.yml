@@ -28,6 +28,9 @@ on:
       ecr-repository:
         description: 'ECR Repository'
         value: ${{ inputs.ecr-repository }}
+      image:
+        description: 'Image URL'
+        value: ${{ jobs.build.outputs.image }}
       image-tag:
         description: 'Image tag'
         value: ${{ jobs.build.outputs.image-tag }}
@@ -42,6 +45,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
+      image: ${{ steps.build-image.outputs.image }}
       image-tag: ${{ steps.build-image.outputs.image-tag }}
 
     steps:
@@ -86,7 +90,8 @@ jobs:
           docker build -t $ECR_REGISTRY/${{ inputs.ecr-repository }}:$IMAGE_TAG -t $ECR_REGISTRY/${{ inputs.ecr-repository }}:latest .
           docker push $ECR_REGISTRY/${{ inputs.ecr-repository }}:$IMAGE_TAG
           docker push $ECR_REGISTRY/${{ inputs.ecr-repository }}:latest
-          echo "image-tag=$ECR_REGISTRY/${{ inputs.ecr-repository }}:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          echo "image=$ECR_REGISTRY/${{ inputs.ecr-repository }}:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          echo "image-tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Slack Notification
         uses: 8398a7/action-slack@v3
