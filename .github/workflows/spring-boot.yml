@@ -84,7 +84,7 @@ jobs:
         with:
           status: ${{ job.status }}
           job_name: Build # 버그가 있어서 job_name 사용, issue: https://github.com/8398a7/action-slack/issues/185
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
+          fields: repo,message,commit,author,eventName,ref,workflow,job,took,pullRequest
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         if: always() # Pick up events even if the job fails or is canceled.
