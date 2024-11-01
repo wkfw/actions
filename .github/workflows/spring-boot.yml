@@ -72,8 +72,8 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v3
         with:
-          java-version: ${{ env.java-version }}
-          distribution: ${{ env.java-distribution }}
+          java-version: ${{ inputs.java-version }}
+          distribution: ${{ inputs.java-distribution }}
 
       - name: Start Redis
         uses: supercharge/redis-github-action@1.4.0
