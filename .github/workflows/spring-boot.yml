@@ -13,6 +13,11 @@ on:
         required: false
         type: string
         default: "temurin"
+      gradle-command:
+        description: 'Gradle build command'
+        required: false
+        type: string
+        default: "build"
       aws-region:
         description: 'AWS Region'
         required: true
@@ -84,7 +89,7 @@ jobs:
       - name: Execute Gradle build
         run: |
           chmod +x ./gradlew
-          ./gradlew build
+          ./gradlew ${{ inputs.gradle-command }}
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
