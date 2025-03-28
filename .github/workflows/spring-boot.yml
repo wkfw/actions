@@ -7,17 +7,17 @@ on:
         description: 'Java version'
         required: false
         type: string
-        default: "17"
+        default: '17'
       java-distribution:
         description: 'Java distribution'
         required: false
         type: string
-        default: "temurin"
+        default: 'temurin'
       gradle-command:
         description: 'Gradle build command'
         required: false
         type: string
-        default: "build"
+        default: 'build'
       aws-region:
         description: 'AWS Region'
         required: true
@@ -103,7 +103,7 @@ jobs:
           docker build -t $ECR_REGISTRY/${{ inputs.ecr-repository }}:$IMAGE_TAG -t $ECR_REGISTRY/${{ inputs.ecr-repository }}:latest .
           docker push $ECR_REGISTRY/${{ inputs.ecr-repository }}:$IMAGE_TAG
           docker push $ECR_REGISTRY/${{ inputs.ecr-repository }}:latest
-          
+
           # outputs
           echo "image-tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
 
